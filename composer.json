@@ -1,0 +1,29 @@
+{
+    "name": "hanson/wechat-work-exception",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hanson",
+            "email": "h@hanc.cc"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Hanson\\WorkException\\": "src/"
+        }
+    },
+    "require": {
+        "overtrue/wechat": "^4.1",
+        "overtrue/laravel-wechat": "^4.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Hanson\\WorkException\\WorkExceptionServiceProvider"
+            ]
+        }
+    },
+    "require-dev": {
+        "laravel/framework": "^5.7"
+    }
+}
