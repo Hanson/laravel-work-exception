@@ -1,4 +1,4 @@
-# wechat-work-exception
+# laravel-work-exception
 使用企业微信通知你的系统异常
 
 ## 特色
