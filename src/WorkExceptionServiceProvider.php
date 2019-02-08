@@ -14,6 +14,10 @@ class WorkExceptionServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config/work_exception.php' => config_path('work_exception.php')
         ], 'work-exception');
+
+        $this->commands([
+            ChatCommand::class,
+        ]);
     }
 
 }

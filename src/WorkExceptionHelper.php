@@ -22,11 +22,11 @@ class WorkExceptionHelper
 
         $cache = $this->getCache($exception);
 
-//        if (!$cache) {
-//            $this->cache($exception);
+        if (!$cache) {
+            $this->cache($exception);
 
             $this->notify($exception);
-//        }
+        }
     }
 
     public function withTrace()
