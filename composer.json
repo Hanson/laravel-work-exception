@@ -13,8 +13,7 @@
         }
     },
     "require": {
-        "overtrue/wechat": "^4.1",
-        "overtrue/laravel-wechat": "^4.0"
+        "overtrue/wechat": "^4.1"
     },
     "extra": {
         "laravel": {

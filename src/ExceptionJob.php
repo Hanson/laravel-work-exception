@@ -5,6 +5,7 @@ namespace Hanson\WorkException;
 
 
 use Carbon\Carbon;
+use EasyWeChat\Factory;
 use EasyWeChat\OpenWork\Work\Application;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -41,7 +42,7 @@ class ExceptionJob implements ShouldQueue
     {
         try {
             /** @var Application $work */
-//            $work = \EasyWeChat::work();
+            $work = Factory::work(config('work_exception.work'));
 
             $message = [
                 'Time:' . Carbon::now()->toDateTimeString(),
@@ -49,18 +50,22 @@ class ExceptionJob implements ShouldQueue
                 'Project Name:' . config('app.name'),
                 'Url:' . $this->url,
                 'Exception:' . sprintf('%s(code:%d): %s at %s:%d', $this->exception, $this->code, $this->message, $this->file, $this->line),
-                'Exception Trace:' . $this->trace,
+                $this->trace ? 'Exception Trace:' . $this->trace : null,
             ];
 
-            $work->chat->send([
-                'chatid' => 404,
+            $result = $work->chat->send([
+                'chatid' => config('work_exception.work.chatid'),
                 'msgtype' => 'text',
                 'text' => [
                     'content' => implode(PHP_EOL, $message)
                 ]
             ]);
-        } catch (\Exception $exception) {
 
+            if ($result['errcode'] != 0) {
+                logger($result['errmsg']);
+            }
+        } catch (\Exception $exception) {
+            logger($exception->getMessage());
         }
     }
 }
