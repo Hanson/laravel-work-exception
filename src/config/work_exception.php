@@ -19,10 +19,10 @@ return [
     ],
 
     'work' => [
-        'corp_id' => 'wx34e688a622367ad4',
-        'agent_id' => 1000010,
-        'secret'   => 'SfaIxqwI9CnrLKJVXlQWMTT9gK8La70U9TyvkNCH5Sc',
+        'corp_id' => 'xxx',
+        'agent_id' => 'xxx',
+        'secret'   => 'xxx',
 
-        'chatid' => 404,
+        'chatid' => 'xxx',
     ],
 ];
