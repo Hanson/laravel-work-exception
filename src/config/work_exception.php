@@ -23,6 +23,14 @@ return [
         'agent_id' => 'xxx',
         'secret'   => 'xxx',
 
+        /**
+         * 可通过 php artisan work:chat 创建
+         */
         'chatid' => 'xxx',
+
+        /**
+         * 可选 textcard 或者 text
+         */
+        'msgtype' => 'textcard',
     ],
 ];

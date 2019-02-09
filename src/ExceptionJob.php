@@ -45,17 +45,21 @@ class ExceptionJob implements ShouldQueue
             $work = Factory::work(config('work_exception.work'));
 
             $message = [
-                'Time:' . Carbon::now()->toDateTimeString(),
-                'Environment:' . config('app.env'),
-                'Project Name:' . config('app.name'),
-                'Url:' . $this->url,
-                'Exception:' . sprintf('%s(code:%d): %s at %s:%d', $this->exception, $this->code, $this->message, $this->file, $this->line),
-                $this->trace ? 'Exception Trace:' . $this->trace : null,
+                '环境: ' . config('app.env'),
+                '项目名称:' . config('app.name'),
+                '出错链接: ' . $this->url,
+                '异常信息: ' . sprintf('%s(code:%d): %s at %s:%d', $this->exception, $this->code, $this->message, $this->file, $this->line),
+                $this->trace ? '异常追踪: ' . $this->trace : null,
             ];
 
             $result = $work->chat->send([
                 'chatid' => config('work_exception.work.chatid'),
-                'msgtype' => 'text',
+                'msgtype' => config('work_exception.work.msgtype', 'textcard'),
+                'textcard' => [
+                    'title' => config('app.name'),
+                    'description' => sprintf("<div>环境： %s</div><div>出错链接： %s</div><div>异常信息： %s</div>", config('app.env'), $this->url, sprintf('%s(code:%d): %s at %s:%d', $this->exception, $this->code, $this->message, $this->file, $this->line)),
+                    'url' => $this->url
+                ],
                 'text' => [
                     'content' => implode(PHP_EOL, $message)
                 ]
